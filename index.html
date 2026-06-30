@@ -17,7 +17,7 @@
 <!-- ============ HEADER / NAV ============ -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <button class="logo" data-nav="home" aria-label="Chalo home">
+    <button class="logo" data-nav="home" aria-label="TravelEase home">
       <span class="logo-icon">🌿</span>
       <span class="logo-text">TravelEase</span>
     </button>
@@ -152,17 +152,17 @@
       </div>
       <div class="form-grid" id="bookingForm">
         <label class="field">
-          <span class="field-label">From city</span>
+          <span class="field-label">From city<span class="req">*</span></span>
           <input type="text" id="fromCity" placeholder="e.g. Mumbai" autocomplete="off">
           <div class="city-suggestions" id="fromSuggestions"></div>
         </label>
         <label class="field">
-          <span class="field-label">To city</span>
+          <span class="field-label">To city<span class="req">*</span></span>
           <input type="text" id="toCity" placeholder="e.g. Goa" autocomplete="off">
           <div class="city-suggestions" id="toSuggestions"></div>
         </label>
         <label class="field">
-          <span class="field-label">Travel date</span>
+          <span class="field-label">Travel date<span class="req">*</span></span>
           <input type="date" id="travelDate">
         </label>
         <label class="field">
@@ -182,7 +182,7 @@
           </div>
         </label>
         <label class="field">
-          <span class="field-label">Total budget (₹)</span>
+          <span class="field-label">Total budget (₹)<span class="req">*</span></span>
           <input type="number" id="totalBudget" min="500" step="500" placeholder="e.g. 25000">
           <span class="field-hint">This covers travel + food + accommodation</span>
         </label>
@@ -297,7 +297,7 @@
   <div class="reco-form-wrap">
     <form class="reco-form" id="recoForm">
       <label class="field">
-        <span class="field-label">From</span>
+        <span class="field-label">From<span class="req">*</span></span>
         <input type="text" id="recoFrom" placeholder="e.g. Delhi" autocomplete="off">
         <div class="city-suggestions" id="recoFromSuggestions"></div>
       </label>
@@ -305,7 +305,7 @@
         <button type="button" id="swapCitiesBtn" class="swap-btn" title="Swap cities">⇄</button>
       </div>
       <label class="field">
-        <span class="field-label">To</span>
+        <span class="field-label">To<span class="req">*</span></span>
         <input type="text" id="recoTo" placeholder="e.g. Manali" autocomplete="off">
         <div class="city-suggestions" id="recoToSuggestions"></div>
       </label>
@@ -390,7 +390,7 @@
     <div class="cancel-main">
       <form class="lookup-form" id="cancelLookupForm">
         <div class="field">
-          <span class="field-label">Booking ID</span>
+          <span class="field-label">Booking ID<span class="req">*</span></span>
           <div class="lookup-input-wrap">
             <input type="text" id="cancelBookingId" placeholder="TRP-XXX-XXX" autocomplete="off">
             <button class="btn btn-primary" type="submit">Look up</button>
@@ -520,14 +520,15 @@
     </div>
 
     <form id="authForm" class="auth-form" novalidate autocomplete="on">
+      <p class="auth-req-hint"><span class="req">*</span> All fields are required</p>
       <label class="field auth-field" data-only="signup">
-        <span class="field-label">Full name</span>
+        <span class="field-label">Full name<span class="req">*</span></span>
         <input type="text" id="authName" placeholder="e.g. Yuvraj Pol" autocomplete="name">
         <span class="auth-err" id="errName"></span>
       </label>
 
       <label class="field auth-field" data-only="signup">
-        <span class="field-label">Mobile number</span>
+        <span class="field-label">Mobile number<span class="req">*</span></span>
         <div class="mobile-input">
           <span class="mobile-prefix">+91</span>
           <input type="tel" id="authMobile" inputmode="numeric" maxlength="10" placeholder="10-digit mobile" autocomplete="tel">
@@ -536,13 +537,13 @@
       </label>
 
       <label class="field auth-field">
-        <span class="field-label">Email</span>
+        <span class="field-label">Email<span class="req">*</span></span>
         <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email">
         <span class="auth-err" id="errEmail"></span>
       </label>
 
       <label class="field auth-field">
-        <span class="field-label">Password</span>
+        <span class="field-label">Password<span class="req">*</span></span>
         <div class="pw-input">
           <input type="password" id="authPassword" placeholder="Enter password" autocomplete="current-password">
           <button type="button" class="pw-toggle" id="pwToggle" aria-label="Show or hide password">👁</button>
@@ -559,7 +560,7 @@
       </ul>
 
       <label class="field auth-field" data-only="signup">
-        <span class="field-label">Confirm password</span>
+        <span class="field-label">Confirm password<span class="req">*</span></span>
         <input type="password" id="authConfirm" placeholder="Re-enter password" autocomplete="new-password">
         <span class="auth-err" id="errConfirm"></span>
       </label>

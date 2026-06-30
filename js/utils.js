@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — utils.js
+   TravelEase — utils.js
    Pure utility functions with no side effects
    ================================================== */
 

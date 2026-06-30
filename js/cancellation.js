@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — cancellation.js
+   TravelEase — cancellation.js
    Booking cancellation and refund logic
    ================================================== */
 

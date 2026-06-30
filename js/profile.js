@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — profile.js
+   TravelEase — profile.js
    Profile page render and interactions
    ================================================== */
 

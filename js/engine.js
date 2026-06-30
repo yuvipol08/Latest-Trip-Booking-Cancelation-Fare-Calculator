@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — engine.js
+   TravelEase — engine.js
    All pricing calculations and business logic
    ================================================== */
 

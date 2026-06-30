@@ -10,10 +10,18 @@ function validateName(v) {
   return '';
 }
 
+// Strip non-digits and an optional +91 country code or leading 0.
+function normalizeMobile(v) {
+  let d = String(v || '').replace(/\D/g, '');
+  if (d.length === 12 && d.startsWith('91')) d = d.slice(2);
+  if (d.length === 11 && d.startsWith('0'))  d = d.slice(1);
+  return d;
+}
+
 // Indian mobile: exactly 10 digits, must start with 6/7/8/9
 // (i.e. NOT starting with 0,1,2,3,4,5).
 function validateMobile(v) {
-  const digits = String(v || '').replace(/\D/g, '');
+  const digits = normalizeMobile(v);
   if (digits.length !== 10) return 'Mobile number must be exactly 10 digits.';
   if (!/^[6-9]/.test(digits)) return 'Indian mobile numbers must start with 6, 7, 8 or 9.';
   return '';
@@ -109,7 +117,7 @@ function handleSignup() {
   Object.entries(errs).forEach(([id, msg]) => setFieldError(id, msg));
   if (Object.values(errs).some(Boolean)) return;
 
-  const mobile = mobileRaw.replace(/\D/g, '');
+  const mobile = normalizeMobile(mobileRaw);
   if (findUserByEmail(email)) {
     setFieldError('authFormError', 'An account with this email already exists. Please sign in.');
     return;
@@ -149,10 +157,10 @@ function initAuth() {
     tab.addEventListener('click', () => setAuthMode(tab.dataset.authMode));
   });
 
-  // Mobile: digits only, capped at 10
+  // Mobile: digits only, drop a pasted +91 / leading 0, capped at 10
   const mobileInput = document.getElementById('authMobile');
   mobileInput.addEventListener('input', () => {
-    mobileInput.value = mobileInput.value.replace(/\D/g, '').slice(0, 10);
+    mobileInput.value = normalizeMobile(mobileInput.value).slice(0, 10);
   });
 
   // Live password checklist

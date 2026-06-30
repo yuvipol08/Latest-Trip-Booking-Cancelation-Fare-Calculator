@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — hotels.js
+   TravelEase — hotels.js
    Hotel browse, filter, and selection logic
    ================================================== */
 
