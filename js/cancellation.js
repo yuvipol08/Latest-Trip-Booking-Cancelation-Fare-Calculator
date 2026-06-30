@@ -87,6 +87,7 @@ function renderCancelResult(booking) {
       refundAmount,
       cancelledOn: todayISO(),
     });
+    if (typeof persistData === 'function') persistData();
 
     result.innerHTML = `
       <div class="banner banner-ok">

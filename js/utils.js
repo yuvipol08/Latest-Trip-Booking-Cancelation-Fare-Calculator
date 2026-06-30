@@ -52,7 +52,7 @@ function filterCities(query) {
   return KNOWN_CITIES.filter(c => c.toLowerCase().startsWith(q)).slice(0, 6);
 }
 
-function bindCityAutocomplete(inputEl, dropdownEl) {
+function bindCityAutocomplete(inputEl, dropdownEl, onSelect) {
   const handler = debounce(() => {
     const matches = filterCities(inputEl.value);
     if (!matches.length || !inputEl.value.trim()) {
@@ -72,6 +72,8 @@ function bindCityAutocomplete(inputEl, dropdownEl) {
         inputEl.value = item.dataset.city;
         dropdownEl.classList.remove('open');
         dropdownEl.innerHTML = '';
+        // Let callers react to a picked suggestion (e.g. re-render hotel results).
+        if (typeof onSelect === 'function') onSelect(item.dataset.city);
       });
     });
   }, 150);

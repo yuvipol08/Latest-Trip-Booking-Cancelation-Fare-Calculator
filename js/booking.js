@@ -255,6 +255,7 @@ function confirmBooking() {
     distance:        calc.distance,
   };
   state.bookings.push(booking);
+  if (typeof persistData === 'function') persistData();
 
   document.getElementById('confirmArea').hidden = true;
   const ticket = document.getElementById('bookingTicket');
@@ -337,8 +338,21 @@ function initBookingPage() {
       const target = document.getElementById(btn.dataset.target);
       const val = parseInt(target.value, 10) || 0;
       const step = 1;
-      if (btn.dataset.action === 'inc') target.value = val + step;
-      if (btn.dataset.action === 'dec') target.value = Math.max(parseInt(target.min || 1), val - step);
+      const min = parseInt(target.min, 10) || 1;
+      const max = parseInt(target.max, 10) || Infinity;
+      if (btn.dataset.action === 'inc') target.value = Math.min(max, val + step);
+      if (btn.dataset.action === 'dec') target.value = Math.max(min, val - step);
+    });
+  });
+
+  // Clamp manual entry in the number inputs to their min/max
+  document.querySelectorAll('.number-input-wrap input[type="number"]').forEach(input => {
+    input.addEventListener('change', () => {
+      const min = parseInt(input.min, 10) || 1;
+      const max = parseInt(input.max, 10) || Infinity;
+      let v = parseInt(input.value, 10);
+      if (isNaN(v)) v = min;
+      input.value = Math.min(max, Math.max(min, v));
     });
   });
 
