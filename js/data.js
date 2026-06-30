@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — data.js
+   TravelEase — data.js
    All static content: cities, modes, pricing, seed data
    ================================================== */
 
@@ -18,7 +18,7 @@ const POPULAR_TRIPS = [
 ];
 
 const TESTIMONIALS = [
-  { quote: 'Set a budget, picked "Chill," and Chalo had the whole Goa trip costed out before I finished my chai.', who: 'Riya, Mumbai' },
+  { quote: 'Set a budget, picked "Chill," and TravelEase had the whole Goa trip costed out before I finished my chai.', who: 'Riya, Mumbai' },
   { quote: 'The budget split planner saved us from blowing everything on flights. We had buffer money left over!', who: 'Aman & Divya, Pune' },
   { quote: 'Booked, then plans changed. The refund preview meant no surprises when I had to cancel.', who: 'Karthik, Chennai' },
 ];

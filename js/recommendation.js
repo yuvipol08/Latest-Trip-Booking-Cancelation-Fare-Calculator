@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — recommendation.js
+   TravelEase — recommendation.js
    Route comparison logic
    ================================================== */
 

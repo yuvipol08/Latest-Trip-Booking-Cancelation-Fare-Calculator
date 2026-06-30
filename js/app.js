@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — app.js
+   TravelEase — app.js
    Global state, navigation, and app bootstrap
    ================================================== */
 

@@ -1,5 +1,5 @@
 /* ==================================================
-   CHALO — booking.js
+   TravelEase — booking.js
    All booking page logic: form, calculation, confirmation
    ================================================== */
 
