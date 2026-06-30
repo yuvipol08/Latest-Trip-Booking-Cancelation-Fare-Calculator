@@ -1,0 +1,71 @@
+/* =====================================================
+   CHALO — design tokens
+   Palette: forest green + deep violet, cream accents.
+   A grounded, earthy travel palette — not tech-blue,
+   not fintech-dark. Think Kodak film + Indian spice markets.
+   ===================================================== */
+
+:root {
+  /* Backgrounds */
+  --bg:          #F7F5F0;
+  --bg-soft:     #EFEDE6;
+  --bg-deep:     #1A1628;
+
+  /* Surfaces */
+  --panel:       #FFFFFF;
+  --panel-tint:  #F0EEF8;
+  --panel-green: #EBF5EE;
+
+  /* Borders */
+  --border:        rgba(60, 50, 90, 0.12);
+  --border-strong: rgba(60, 50, 90, 0.24);
+
+  /* Text */
+  --text:       #1A1628;
+  --text-mid:   #4A4260;
+  --text-dim:   #7E78A0;
+  --text-faint: #B2ADCB;
+
+  /* Brand colors */
+  --green:       #2C7A4B;
+  --green-mid:   #3D9960;
+  --green-light: #6DBF87;
+  --green-soft:  rgba(44, 122, 75, 0.12);
+  --green-glow:  rgba(44, 122, 75, 0.25);
+
+  --violet:      #5B3FA6;
+  --violet-mid:  #7A5CC4;
+  --violet-light:#A68FE0;
+  --violet-soft: rgba(91, 63, 166, 0.10);
+  --violet-glow: rgba(91, 63, 166, 0.25);
+
+  --amber:       #C9891A;
+  --amber-soft:  rgba(201, 137, 26, 0.12);
+
+  --rust:        #C0442A;
+  --rust-soft:   rgba(192, 68, 42, 0.10);
+
+  --teal:        #1E8A79;
+  --teal-soft:   rgba(30, 138, 121, 0.10);
+
+  /* Fonts */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body:    "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", "Courier New", monospace;
+
+  /* Shape */
+  --radius:    16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+
+  /* Sizing */
+  --container: 1160px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(26,22,40,0.06), 0 0 0 1px rgba(26,22,40,0.05);
+  --shadow:    0 4px 16px rgba(26,22,40,0.08), 0 0 0 1px rgba(26,22,40,0.05);
+  --shadow-lg: 0 12px 40px rgba(26,22,40,0.12);
+
+  /* Transitions */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

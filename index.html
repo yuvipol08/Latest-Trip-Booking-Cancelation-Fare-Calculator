@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelEase — Plan it. Price it. Pack it.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <button class="logo" data-nav="home" aria-label="Chalo home">
+      <span class="logo-icon">🌿</span>
+      <span class="logo-text">TravelEase</span>
+    </button>
+    <nav class="main-nav" id="mainNav">
+      <button class="nav-link" data-nav="home">Home</button>
+      <button class="nav-link" data-nav="booking">Book a Trip</button>
+      <button class="nav-link" data-nav="recommendation">Compare Routes</button>
+      <button class="nav-link" data-nav="hotels">Hotels</button>
+      <button class="nav-link" data-nav="cancellation">Cancel</button>
+      <button class="nav-link" data-nav="profile">Profile</button>
+    </nav>
+    <div class="header-right">
+      <span class="user-greeting" id="headerGreeting"></span>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="progress-bar" id="progressBar"></div>
+</header>
+
+<main id="mainContent">
+
+<!-- ===== PAGE: HOME ===== -->
+<section class="page active" id="page-home" data-page="home">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🇮🇳 Budget-first travel planner</div>
+      <h1 class="hero-title">Your next trip,<br><span class="accent">planned right.</span></h1>
+      <p class="hero-sub">Tell TravelEase your mood, your money, and your dates — we'll figure out the best way to get there.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" data-nav="booking">
+          <span>Plan a trip</span>
+          <span class="btn-icon">→</span>
+        </button>
+        <button class="btn btn-outline btn-lg" data-nav="recommendation">Compare routes</button>
+        <button class="btn btn-outline btn-lg" data-nav="hotels">🏨 Hotels</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-val">1,372</span><span class="stat-label">trips planned</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-val">4 modes</span><span class="stat-label">compared live</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-val">₹0</span><span class="stat-label">booking fees</span></div>
+      </div>
+    </div>
+    <div class="hero-board" aria-label="Mood-based destination board">
+      <div class="board-header">
+        <span class="board-label">NOW BOARDING — PICK A MOOD</span>
+        <span class="board-dot"></span>
+      </div>
+      <div class="board-rows" id="moodBoard"></div>
+    </div>
+  </section>
+
+  <section class="section how-section">
+    <div class="section-head center">
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps to your trip</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <h3>Set your budget</h3>
+        <p>Enter where you're going, how many people, and your total budget. We'll do the maths.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <h3>Compare options</h3>
+        <p>See every bus, train, flight, and cab option ranked by cost, speed, and comfort.</p>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <h3>Confirm and go</h3>
+        <p>Pick your plan, get a booking ID, and view your full cost breakdown.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <p class="eyebrow">Most booked this season</p>
+      <h2>Where everyone else is going</h2>
+    </div>
+    <div class="card-row" id="popularTrips"></div>
+  </section>
+
+  <section class="section section-tinted">
+    <div class="section-head">
+      <p class="eyebrow">From the road</p>
+      <h2>What travelers are saying</h2>
+    </div>
+    <div class="testimonial-row" id="testimonials"></div>
+  </section>
+
+</section>
+
+<!-- ===== PAGE: BOOKING ===== -->
+<section class="page" id="page-booking" data-page="booking">
+  <div class="page-head">
+    <p class="eyebrow">Core planner</p>
+    <h1>Build your trip</h1>
+    <p class="page-sub">Fill in the details below. We'll calculate costs, compare options, and find the best plan for your budget.</p>
+  </div>
+
+  <div class="wizard" id="bookingWizard">
+
+    <!-- STEP 1: Transport -->
+    <div class="wizard-step" id="step1" data-step="1">
+      <div class="wizard-step-header">
+        <div class="wizard-step-num">1</div>
+        <div>
+          <div class="wizard-step-title">Transport preference</div>
+          <div class="wizard-step-desc">Which mode do you prefer? We'll still show you all options later.</div>
+        </div>
+      </div>
+      <div class="mode-grid" id="modeGrid"></div>
+    </div>
+
+    <!-- STEP 2: Trip Details -->
+    <div class="wizard-step" id="step2" data-step="2">
+      <div class="wizard-step-header">
+        <div class="wizard-step-num">2</div>
+        <div>
+          <div class="wizard-step-title">Trip details</div>
+          <div class="wizard-step-desc">Tell us where you're headed and what you're working with.</div>
+        </div>
+      </div>
+      <div class="form-grid" id="bookingForm">
+        <label class="field">
+          <span class="field-label">From city</span>
+          <input type="text" id="fromCity" placeholder="e.g. Mumbai" autocomplete="off">
+          <div class="city-suggestions" id="fromSuggestions"></div>
+        </label>
+        <label class="field">
+          <span class="field-label">To city</span>
+          <input type="text" id="toCity" placeholder="e.g. Goa" autocomplete="off">
+          <div class="city-suggestions" id="toSuggestions"></div>
+        </label>
+        <label class="field">
+          <span class="field-label">Travel date</span>
+          <input type="date" id="travelDate">
+        </label>
+        <label class="field">
+          <span class="field-label">Nights at destination</span>
+          <div class="number-input-wrap">
+            <button class="num-btn" data-target="tripNights" data-action="dec">−</button>
+            <input type="number" id="tripNights" min="1" max="30" value="3">
+            <button class="num-btn" data-target="tripNights" data-action="inc">+</button>
+          </div>
+        </label>
+        <label class="field">
+          <span class="field-label">Number of travellers</span>
+          <div class="number-input-wrap">
+            <button class="num-btn" data-target="numPeople" data-action="dec">−</button>
+            <input type="number" id="numPeople" min="1" max="20" value="2">
+            <button class="num-btn" data-target="numPeople" data-action="inc">+</button>
+          </div>
+        </label>
+        <label class="field">
+          <span class="field-label">Total budget (₹)</span>
+          <input type="number" id="totalBudget" min="500" step="500" placeholder="e.g. 25000">
+          <span class="field-hint">This covers travel + food + accommodation</span>
+        </label>
+        <label class="field">
+          <span class="field-label">Preferred stay</span>
+          <div class="stay-selector" id="staySelector">
+            <button class="stay-btn" data-tier="budget">
+              <span class="stay-icon">🏕️</span>
+              <span class="stay-name">Budget</span>
+              <span class="stay-price">~₹1,200/night</span>
+            </button>
+            <button class="stay-btn selected" data-tier="midrange">
+              <span class="stay-icon">🏨</span>
+              <span class="stay-name">Comfort</span>
+              <span class="stay-price">~₹2,800/night</span>
+            </button>
+            <button class="stay-btn" data-tier="premium">
+              <span class="stay-icon">🏩</span>
+              <span class="stay-name">Premium</span>
+              <span class="stay-price">~₹6,000/night</span>
+            </button>
+          </div>
+          <input type="hidden" id="stayTier" value="midrange">
+        </label>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary btn-lg" id="calculateBtn">
+          <span>Calculate my plan</span>
+          <span class="btn-icon">→</span>
+        </button>
+        <p class="field-error" id="formError"></p>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-area" id="bookingResults" hidden>
+
+      <!-- STEP 3: Timing -->
+      <div class="wizard-step result-step" id="step3" data-step="3">
+        <div class="wizard-step-header">
+          <div class="wizard-step-num done">3</div>
+          <div class="wizard-step-title">Timing</div>
+        </div>
+        <div id="timingBanner"></div>
+      </div>
+
+      <!-- STEP 4: Cost Breakdown -->
+      <div class="wizard-step result-step" id="step4" data-step="4">
+        <div class="wizard-step-header">
+          <div class="wizard-step-num done">4</div>
+          <div class="wizard-step-title">Cost breakdown</div>
+        </div>
+        <div class="cost-grid" id="costGrid"></div>
+      </div>
+
+      <!-- STEP 5: Budget Check -->
+      <div class="wizard-step result-step" id="step5" data-step="5">
+        <div class="wizard-step-header">
+          <div class="wizard-step-num done">5</div>
+          <div class="wizard-step-title">Budget check</div>
+        </div>
+        <div id="budgetCheck"></div>
+        <div class="budget-gauge-wrap" id="budgetGaugeWrap"></div>
+      </div>
+
+      <!-- STEP 6: Budget Split -->
+      <div class="wizard-step result-step" id="step6" data-step="6">
+        <div class="wizard-step-header">
+          <div class="wizard-step-num done">6</div>
+          <div class="wizard-step-title">Budget split planner</div>
+        </div>
+        <p class="step-desc">Here's how your ₹<span id="budgetEcho">0</span> is divided across the trip.</p>
+        <div class="split-bar" id="splitBar"></div>
+        <div class="split-legend" id="splitLegend"></div>
+      </div>
+
+      <!-- STEP 7: Best Plans -->
+      <div class="wizard-step result-step" id="step7" data-step="7">
+        <div class="wizard-step-header">
+          <div class="wizard-step-num done">7</div>
+          <div class="wizard-step-title">All plan options</div>
+        </div>
+        <p class="step-desc">Every transport × stay combination ranked against your budget.</p>
+        <div id="comboTable"></div>
+      </div>
+
+      <!-- STEP 8: Confirm -->
+      <div class="wizard-step result-step" id="step8" data-step="8">
+        <div class="wizard-step-header">
+          <div class="wizard-step-num done">8</div>
+          <div class="wizard-step-title">Confirm booking</div>
+        </div>
+        <div id="confirmArea">
+          <p class="step-desc">Happy with this plan? Confirm to generate your booking ID.</p>
+          <button class="btn btn-primary btn-lg" id="confirmBookingBtn">Confirm booking →</button>
+        </div>
+        <div class="ticket" id="bookingTicket" hidden></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE: RECOMMENDATION ===== -->
+<section class="page" id="page-recommendation" data-page="recommendation">
+  <div class="page-head">
+    <p class="eyebrow">Before you book</p>
+    <h1>Compare routes</h1>
+    <p class="page-sub">Same destination, every transport mode. See the tradeoffs before committing.</p>
+  </div>
+
+  <div class="reco-form-wrap">
+    <form class="reco-form" id="recoForm">
+      <label class="field">
+        <span class="field-label">From</span>
+        <input type="text" id="recoFrom" placeholder="e.g. Delhi" autocomplete="off">
+        <div class="city-suggestions" id="recoFromSuggestions"></div>
+      </label>
+      <div class="swap-btn-wrap">
+        <button type="button" id="swapCitiesBtn" class="swap-btn" title="Swap cities">⇄</button>
+      </div>
+      <label class="field">
+        <span class="field-label">To</span>
+        <input type="text" id="recoTo" placeholder="e.g. Manali" autocomplete="off">
+        <div class="city-suggestions" id="recoToSuggestions"></div>
+      </label>
+      <button class="btn btn-primary" id="recoCompareBtn" type="submit">Compare →</button>
+    </form>
+  </div>
+
+  <div id="recoResults" hidden>
+    <div class="insight-row" id="insightRow"></div>
+    <div class="distance-info" id="distanceInfo"></div>
+    <div id="compareTable"></div>
+  </div>
+</section>
+
+<!-- ===== PAGE: PROFILE ===== -->
+<section class="page" id="page-profile" data-page="profile">
+  <div class="page-head">
+    <p class="eyebrow">Your account</p>
+    <h1>Profile</h1>
+  </div>
+
+  <div class="profile-layout">
+    <div class="profile-sidebar">
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar">?</div>
+        <div class="profile-name" id="profileDisplayName">Traveller</div>
+        <div class="profile-city" id="profileDisplayCity">—</div>
+      </div>
+      <div class="profile-card">
+        <h3 class="card-title">Your details</h3>
+        <div class="form-stack">
+          <label class="field">
+            <span class="field-label">Name</span>
+            <input type="text" id="userName" placeholder="Your name">
+          </label>
+          <label class="field">
+            <span class="field-label">Home city</span>
+            <input type="text" id="userCity" placeholder="e.g. Pune">
+          </label>
+        </div>
+        <button class="btn btn-secondary" id="saveProfileBtn">Save details</button>
+      </div>
+      <div class="profile-card">
+        <h3 class="card-title">Bucket list</h3>
+        <form class="bucket-form" id="bucketForm">
+          <input type="text" id="bucketInput" placeholder="Dream destination">
+          <button class="btn btn-icon-only" type="submit" title="Add">+</button>
+        </form>
+        <div class="chip-row" id="bucketList"></div>
+      </div>
+    </div>
+
+    <div class="profile-main">
+      <div class="profile-tabs">
+        <button class="tab-btn active" data-tab="bookings">
+          Bookings <span class="tab-count" id="bookingCount">0</span>
+        </button>
+        <button class="tab-btn" data-tab="cancellations">
+          Cancellations <span class="tab-count" id="cancelCount">0</span>
+        </button>
+      </div>
+      <div class="tab-content active" id="tab-bookings">
+        <div id="bookingHistory"></div>
+      </div>
+      <div class="tab-content" id="tab-cancellations">
+        <div id="cancellationHistory"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE: CANCELLATION ===== -->
+<section class="page" id="page-cancellation" data-page="cancellation">
+  <div class="page-head">
+    <p class="eyebrow">Change of plans?</p>
+    <h1>Cancel a booking</h1>
+    <p class="page-sub">Enter your booking ID. We'll show you your exact refund before you cancel anything.</p>
+  </div>
+
+  <div class="cancel-layout">
+    <div class="cancel-main">
+      <form class="lookup-form" id="cancelLookupForm">
+        <div class="field">
+          <span class="field-label">Booking ID</span>
+          <div class="lookup-input-wrap">
+            <input type="text" id="cancelBookingId" placeholder="TRP-XXX-XXX" autocomplete="off">
+            <button class="btn btn-primary" type="submit">Look up</button>
+          </div>
+        </div>
+      </form>
+      <div id="cancelResult"></div>
+    </div>
+
+    <div class="cancel-sidebar">
+      <div class="info-card">
+        <h3 class="card-title">Refund policy</h3>
+        <div class="refund-policy">
+          <div class="policy-row ok">
+            <span class="policy-icon">✓</span>
+            <div>
+              <div class="policy-label">More than 7 days before</div>
+              <div class="policy-val">Full refund (100%)</div>
+            </div>
+          </div>
+          <div class="policy-row warn">
+            <span class="policy-icon">⚡</span>
+            <div>
+              <div class="policy-label">2–7 days before</div>
+              <div class="policy-val">Partial refund (50%)</div>
+            </div>
+          </div>
+          <div class="policy-row bad">
+            <span class="policy-icon">✕</span>
+            <div>
+              <div class="policy-label">Less than 2 days</div>
+              <div class="policy-val">No refund (0%)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-card">
+        <h3 class="card-title">Your bookings</h3>
+        <div id="cancelPageBookingList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAGE: HOTELS ===== -->
+<section class="page" id="page-hotels" data-page="hotels">
+  <div class="page-head">
+    <p class="eyebrow">Where you'll sleep</p>
+    <h1>Find your stay</h1>
+    <p class="page-sub">Browse hotels, guesthouses, and resorts by destination and budget. Select one to carry it straight into your booking.</p>
+  </div>
+
+  <!-- Selected hotel sticky banner -->
+  <div id="hotelSelectedBanner" hidden></div>
+
+  <!-- Search + Filter bar -->
+  <div class="hotel-search-bar">
+    <div class="field hotel-city-field">
+      <span class="field-label">Destination</span>
+      <input type="text" id="hotelCityInput" placeholder="e.g. Goa, Manali, Jaipur…" autocomplete="off">
+      <div class="city-suggestions" id="hotelCitySuggestions"></div>
+    </div>
+    <div class="hotel-tier-quick">
+      <button class="hotel-tier-btn active" data-tier="">All tiers</button>
+      <button class="hotel-tier-btn" data-tier="budget">🏕️ Budget</button>
+      <button class="hotel-tier-btn" data-tier="midrange">🏨 Comfort</button>
+      <button class="hotel-tier-btn" data-tier="premium">🏩 Premium</button>
+    </div>
+    <select id="hotelTierFilter" class="hotel-tier-select" aria-label="Filter by tier">
+      <option value="">All tiers</option>
+      <option value="budget">Budget</option>
+      <option value="midrange">Comfort</option>
+      <option value="premium">Premium</option>
+    </select>
+  </div>
+
+  <!-- Tier info strip -->
+  <div class="hotel-tier-strip">
+    <div class="tier-strip-card budget-strip">
+      <span class="tier-strip-icon">🏕️</span>
+      <div>
+        <div class="tier-strip-label">Budget</div>
+        <div class="tier-strip-price">Up to ₹1,500/night</div>
+      </div>
+    </div>
+    <div class="tier-strip-card midrange-strip">
+      <span class="tier-strip-icon">🏨</span>
+      <div>
+        <div class="tier-strip-label">Comfort</div>
+        <div class="tier-strip-price">₹1,500 – ₹4,000/night</div>
+      </div>
+    </div>
+    <div class="tier-strip-card premium-strip">
+      <span class="tier-strip-icon">🏩</span>
+      <div>
+        <div class="tier-strip-label">Premium</div>
+        <div class="tier-strip-price">₹4,000+/night</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hotel grid -->
+  <div class="hotel-grid" id="hotelGrid"></div>
+  <div id="hotelNoResults"></div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="logo-text">🌿 TravelEase</span>
+    <p>Prices are estimates for planning purposes, not live fares.</p>
+    <div class="footer-links">
+      <button class="footer-link" data-nav="booking">Plan a trip</button>
+      <button class="footer-link" data-nav="recommendation">Compare routes</button>
+      <button class="footer-link" data-nav="hotels">Hotels</button>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/home.js"></script>
+<script src="js/booking.js"></script>
+<script src="js/recommendation.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/cancellation.js"></script>
+<script src="js/hotels.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
