@@ -8,6 +8,13 @@ function renderProfile() {
   const name = state.user.name || 'Traveller';
   document.getElementById('profileDisplayName').textContent = name;
   document.getElementById('profileDisplayCity').textContent = state.user.city || '—';
+  const contactEl = document.getElementById('profileContact');
+  if (contactEl) {
+    const bits = [];
+    if (state.user.mobile) bits.push('📱 +91 ' + state.user.mobile);
+    if (state.user.email)  bits.push('✉️ ' + state.user.email);
+    contactEl.textContent = bits.join('  ·  ');
+  }
   document.getElementById('profileAvatar').textContent = name.charAt(0).toUpperCase();
   document.getElementById('headerGreeting').textContent = state.user.name ? `Hi, ${state.user.name.split(' ')[0]}` : '';
 
@@ -31,6 +38,7 @@ function renderProfile() {
   bucketEl.querySelectorAll('[data-remove-bucket]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.bucketList.splice(parseInt(btn.dataset.removeBucket, 10), 1);
+      if (typeof persistData === 'function') persistData();
       renderProfile();
     });
   });
@@ -98,7 +106,11 @@ function initProfilePage() {
   document.getElementById('saveProfileBtn').addEventListener('click', () => {
     state.user.name = document.getElementById('userName').value.trim();
     state.user.city = document.getElementById('userCity').value.trim();
+    // Keep the stored account record in sync with profile edits
+    if (state.user.email && typeof syncAccount === 'function') syncAccount();
+    if (typeof persistData === 'function') persistData();
     renderProfile();
+    if (typeof updateAuthHeader === 'function') updateAuthHeader();
     showToast('Profile saved ✓');
   });
 
@@ -108,6 +120,7 @@ function initProfilePage() {
     const val = input.value.trim();
     if (val && !state.bucketList.includes(val)) {
       state.bucketList.push(val);
+      if (typeof persistData === 'function') persistData();
       showToast(`${val} added to bucket list`);
     }
     input.value = '';

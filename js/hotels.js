@@ -3,6 +3,9 @@
    Hotel browse, filter, and selection logic
    ================================================== */
 
+// Active tier filter for the hotels page ('' = all tiers).
+let hotelTierFilter = '';
+
 function starHTML(n) {
   return '★'.repeat(n) + '☆'.repeat(5 - n);
 }
@@ -45,13 +48,12 @@ function renderHotelCard(h, isSelected) {
 
 function renderHotelsPage() {
   const cityInput  = document.getElementById('hotelCityInput');
-  const tierFilter = document.getElementById('hotelTierFilter');
   const grid       = document.getElementById('hotelGrid');
   const noResults  = document.getElementById('hotelNoResults');
   const selectedBanner = document.getElementById('hotelSelectedBanner');
 
   const city = (cityInput.value || '').trim();
-  const tier = tierFilter.value; // '' | 'budget' | 'midrange' | 'premium'
+  const tier = hotelTierFilter; // '' | 'budget' | 'midrange' | 'premium'
 
   let hotels = getHotelsForCity(city);
   if (tier) hotels = hotels.filter(h => h.tier === tier);
@@ -145,23 +147,21 @@ function renderHotelsPage() {
 
 function initHotelsPage() {
   const cityInput  = document.getElementById('hotelCityInput');
-  const tierFilter = document.getElementById('hotelTierFilter');
 
-  // City autocomplete for hotel search
-  bindCityAutocomplete(cityInput, document.getElementById('hotelCitySuggestions'));
+  // City autocomplete for hotel search — re-render the grid when a city is picked
+  bindCityAutocomplete(cityInput, document.getElementById('hotelCitySuggestions'), renderHotelsPage);
 
   cityInput.addEventListener('input', () => {
     // Debounce already in bindCityAutocomplete; also re-render on change
     setTimeout(renderHotelsPage, 180);
   });
-  tierFilter.addEventListener('change', renderHotelsPage);
 
   // Tier quick-filter buttons
   document.querySelectorAll('.hotel-tier-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.hotel-tier-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      tierFilter.value = btn.dataset.tier;
+      hotelTierFilter = btn.dataset.tier || '';
       renderHotelsPage();
     });
   });
